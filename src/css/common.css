@@ -16,3 +16,10 @@ img {
   display: block;
   max-width: 100%;
 }
+
+.value {
+  color: blue;
+  font-size: larger;
+}
+
+
