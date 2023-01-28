@@ -1,12 +1,12 @@
 import Notiflix from 'notiflix';
 import "notiflix/dist/notiflix-3.2.6.min.css";
 
-const createPromiseBtn = document.querySelector ("button");
-const delay = document.querySelector("name[delay]");
-const step = document.querySelector ("name[step]");
-const amount = document.querySelector("name[amount]");
+const submitForm = document.querySelector(".form");
+//const delay = document.querySelector("name[delay]");
+//const step = document.querySelector ("name[step]");
+//const amount = document.querySelector("name[amount]");
 
-createPromiseBtn.addEventListener ("click", onCreatePromiseBtnClick);
+submitForm.addEventListener("submit", onSubmit);
 
 function createPromise(position, delay) {
   return new Promise((resolve, reject)=>{
@@ -24,8 +24,12 @@ function createPromise(position, delay) {
 })
 }
 
-function onCreatePromiseBtnClick(e){
+function onSubmit(e){
   e.preventDefault();
+  const {amount, delay,step} = e.target.elements;
+  let delayValue= +delay.value;
+  //let amountValue = +amount.value;
+  //let stepValue = +step.value;
 
   for (let position = 1; position <= amount.value; position +=1) {
 createPromise(position,delay) 
@@ -35,5 +39,5 @@ createPromise(position,delay)
   .catch(({ position, delay }) => {
     Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
   });
-  delay.value += step.value;
+  delayValue += +step.value;
 }}
