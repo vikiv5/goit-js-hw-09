@@ -1,4 +1,3 @@
-
 import flatpickr from "flatpickr";
 // Додатковий імпорт стилів
 import "flatpickr/dist/flatpickr.min.css";
@@ -22,7 +21,8 @@ const options = {
     minuteIncrement: 1,
     onClose(selectedDates) {
         if(selectedDates[0] < options.defaultDate){
-           Notiflix.Notify.failure ("please choose a date in the future ")
+           Notiflix.Notify.failure ("please choose a date in the future ");
+ startBtn.disabled=true;
         } else {
             options.defaultDate=selectedDates[0];
             startBtn.removeAttribute("disabled")
@@ -43,6 +43,12 @@ const options = {
     const convertedDate= convertMs(ms)
 
     timerId=setInterval(onStartBtnClick, 1000)
+
+    if (selectedDate < Date.now ){
+      startBtn.disabled=true;
+    }else {
+      startBtn.removeAttribute("disabled")
+  }
 
     spanDays.textContent=addLeadingZero(convertedDate.days);
     spanHours.textContent=addLeadingZero(convertedDate.hours);
